@@ -20,13 +20,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delele(int id) {
-        Optional<ProductEntity> entity=repository.findById(id);
+        Optional<ProductEntity> entity = repository.findById(id);
         repository.delete(entity.get());
     }
 
     @Override
     public void update(ProductDto dto) {
-        Optional<ProductEntity> entity=repository.findById(dto.productId);
+        Optional<ProductEntity> entity = repository.findById(dto.productId);
         entity.get().setProductName(dto.productName);
         entity.get().setProductPrice(dto.getProductPrice());
         entity.get().setProductSize(dto.productSize);
@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void add(ProductDto dto) {
-        ProductEntity entity=new ProductEntity();
+        ProductEntity entity = new ProductEntity();
         entity.setProductName(dto.productName);
         entity.setProductPrice(dto.getProductPrice());
         entity.setProductSize(dto.productSize);
@@ -44,8 +44,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto getProduct(int id) {
-        Optional<ProductEntity> entity=repository.findById(id);
-        ProductDto dto=new ProductDto();
+        Optional<ProductEntity> entity = repository.findById(id);
+        ProductDto dto = new ProductDto();
         dto.setProductPrice(entity.get().productPrice);
         dto.setProductName(entity.get().productName);
         dto.setProductSize(entity.get().productSize);
@@ -55,10 +55,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getAllProduct() {
-        List<ProductEntity> entities=repository.findAll();
-        List<ProductDto> dtos=new ArrayList<>();
-        for(ProductEntity entity: entities){
-            ProductDto dto=new ProductDto();
+        List<ProductEntity> entities = repository.findAll();
+        List<ProductDto> dtos = new ArrayList<>();
+        for (ProductEntity entity : entities) {
+            ProductDto dto = new ProductDto();
             dto.setProductPrice(entity.productPrice);
             dto.setProductName(entity.productName);
             dto.setProductSize(entity.productSize);
@@ -67,5 +67,12 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return dtos;
+    }
+
+    @Override
+    public int sumProductSize() {
+
+        return repository.findAll().stream().mapToInt(ProductEntity::getProductSize).sum();
+
     }
 }

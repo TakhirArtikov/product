@@ -18,7 +18,7 @@ public class ProductController {
         return service.getProduct(id);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<ProductDto> getAllProducts(){
         return service.getAllProduct();
     }
@@ -36,6 +36,11 @@ public class ProductController {
     public void deleteProduct(@PathVariable int id){
 
         service.delele(id);
+    }
+    @GetMapping("/sum-size")
+    public int sumProductSize(){
+       return service.sumProductSize();
+
     }
 
 }

@@ -11,4 +11,6 @@ public interface ProductService {
     void add(ProductDto dto);
     ProductDto getProduct(int id);
     List<ProductDto> getAllProduct();
+
+    int sumProductSize();
 }
